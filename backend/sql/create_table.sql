@@ -21,6 +21,7 @@ CREATE TABLE Users (
     createdAt TIMESTAMP NOT NULL DEFAULT NOW(),
     updatedAt TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE now(),
     PRIMARY KEY (id)
+    CONSTRAINT UQEmail UNIQUE (email)
 );
 
 CREATE TABLE Exchanges (
