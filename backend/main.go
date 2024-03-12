@@ -34,11 +34,14 @@ func main() {
 
 	router := gin.Default()
 
-	apiController := &api.APIContoller{
-		DBController: &db.DBController{Database: dbConn},
+	apiController := &api.APIController{
+		DBController: &db.DBController{
+			Database: dbConn,
+		},
 	}
 
 	router.GET("/users/:id", apiController.GetUserByID)
+	router.DELETE("/users/:id", apiController.DeleteUserByID)
 	router.POST("/users", apiController.CreateUser)
 
 	router.Run()

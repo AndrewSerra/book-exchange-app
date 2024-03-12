@@ -1,6 +1,6 @@
 use books;
 
-CREATE TABLE Books (
+CREATE TABLE IF NOT EXISTS Books (
     id         INT AUTO_INCREMENT NOT NULL,
     title      VARCHAR(128) NOT NULL,
     author     VARCHAR(255) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE Books (
     PRIMARY KEY (id)  
 );
 
-CREATE TABLE Users (
+CREATE TABLE IF NOT EXISTS Users (
     id         INT AUTO_INCREMENT NOT NULL,
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE Users (
     CONSTRAINT UQEmail UNIQUE (email)
 );
 
-CREATE TABLE Exchanges (
+CREATE TABLE IF NOT EXISTS Exchanges (
     id           INT AUTO_INCREMENT NOT NULL,
     bookId INT NOT NULL,
     fromUserId   INT NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE Exchanges (
     FOREIGN KEY (toUserId) REFERENCES Users(id)
 );
 
-CREATE TABLE Reviews (
+CREATE TABLE IF NOT EXISTS Reviews (
     id INT AUTO_INCREMENT NOT NULL,
     bookId INT NOT NULL,
     userId INT NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE Reviews (
     FOREIGN KEY (exchangeId) REFERENCES Exchanges(id)
 );
 
-CREATE TABLE Addresses (
+CREATE TABLE IF NOT EXISTS Addresses (
     id INT AUTO_INCREMENT NOT NULL,
     userId INT NOT NULL,
     isDefault BIT NOT NULL DEFAULT 0,

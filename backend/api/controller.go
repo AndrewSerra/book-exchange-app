@@ -4,6 +4,6 @@ import (
 	"../db"
 )
 
-type APIContoller struct {
+type APIController struct {
 	DBController *db.DBController
 }
