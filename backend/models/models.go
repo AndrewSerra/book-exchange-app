@@ -11,6 +11,7 @@ type Book struct {
 	Author  string              `json:"author" binding:"required"`
 	PubDate utils.MonthYearDate `json:"pubDate" binding:"required"`
 	Lang    string              `json:"lang" binding:"required"`
+	ISBN    string              `json:"isbn" binding:"required"`
 }
 
 type BookWithID struct {
