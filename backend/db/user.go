@@ -59,6 +59,9 @@ func (c *DBController) InsertUser(user models.User) (*models.UserWithID, error) 
 					Err: mysqlerr,
 				}
 			}
+			return nil, &utils.UnknownError{
+				Err: err,
+			}
 		}
 		return nil, &utils.UnknownError{
 			Err: err,
@@ -92,7 +95,7 @@ func (c *DBController) DeleteUser(uid int64) error {
 	result, err := db.Exec("DELETE FROM Users WHERE id = ?;", uid)
 
 	if err != nil {
-		log.Printf(err.Error())
+		log.Println(err.Error())
 		return err
 	} else if count, _ := result.RowsAffected(); count == 0 {
 		return &utils.DataNotFoundError{

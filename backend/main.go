@@ -44,5 +44,9 @@ func main() {
 	router.DELETE("/users/:id", apiController.DeleteUserByID)
 	router.POST("/users", apiController.CreateUser)
 
+	router.GET("/books/:id", apiController.GetBookByID)
+	router.DELETE("/books/:id", apiController.DeleteBookByID)
+	router.POST("/books", apiController.CreateBook)
+
 	router.Run()
 }

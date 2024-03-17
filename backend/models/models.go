@@ -7,11 +7,12 @@ type ObjectWithID struct {
 }
 
 type Book struct {
-	Title   string              `json:"title" binding:"required"`
-	Author  string              `json:"author" binding:"required"`
-	PubDate utils.MonthYearDate `json:"pubDate" binding:"required"`
-	Lang    string              `json:"lang" binding:"required"`
-	ISBN    string              `json:"isbn" binding:"required"`
+	Title   string         `json:"title" binding:"required"`
+	Author  string         `json:"author" binding:"required"`
+	PubDate utils.YearDate `json:"pubDate" binding:"required"`
+	Genre   utils.Genre    `json:"genre" binding:"required"`
+	Lang    utils.Language `json:"lang" binding:"required"`
+	ISBN    string         `json:"isbn" binding:"required"`
 }
 
 type BookWithID struct {

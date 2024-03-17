@@ -49,3 +49,13 @@ type UnrecognizedTypeError struct {
 func (e *UnrecognizedTypeError) Error() string {
 	return fmt.Sprintf("Unrecognized type: %v", reflect.TypeOf(e.Data))
 }
+
+// MALFORMED DATA
+type MalformedDataError struct {
+	Data interface{}
+	Err  error
+}
+
+func (e *MalformedDataError) Error() string {
+	return fmt.Sprintf("Malformed data type: %s", e.Data)
+}
