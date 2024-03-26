@@ -35,6 +35,10 @@ func (api *APIController) GetUserByID(c *gin.Context) {
 	c.JSON(http.StatusOK, user)
 }
 
+func (api *APIController) GetBooksOwnedByUser(c *gin.Context) {
+
+}
+
 func (api *APIController) CreateUser(c *gin.Context) {
 	var user models.User
 	var createdUser *models.UserWithID

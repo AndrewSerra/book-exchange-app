@@ -35,6 +35,10 @@ func (api *APIController) GetBookByID(c *gin.Context) {
 	c.JSON(http.StatusOK, book)
 }
 
+func (api *APIController) GetUsersReadBookByID(c *gin.Context) {
+
+}
+
 func (api *APIController) CreateBook(c *gin.Context) {
 	var book models.Book
 	var createdBook *models.BookWithID
@@ -64,7 +68,7 @@ func (api *APIController) CreateBook(c *gin.Context) {
 
 func (api *APIController) DeleteBookByID(c *gin.Context) {
 	var err error
-	id, err := strconv.Atoi(c.Param("id"))
+	id, _ := strconv.Atoi(c.Param("id"))
 
 	err = api.DBController.DeleteBookByID(int64(id))
 

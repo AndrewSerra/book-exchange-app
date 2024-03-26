@@ -41,10 +41,12 @@ func main() {
 	}
 
 	router.GET("/users/:id", apiController.GetUserByID)
+	router.GET("/users/:id/books", apiController.GetBooksOwnedByUser)
 	router.DELETE("/users/:id", apiController.DeleteUserByID)
 	router.POST("/users", apiController.CreateUser)
 
 	router.GET("/books/:id", apiController.GetBookByID)
+	router.GET("/books/:id/users", apiController.GetUsersReadBookByID)
 	router.DELETE("/books/:id", apiController.DeleteBookByID)
 	router.POST("/books", apiController.CreateBook)
 
