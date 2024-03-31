@@ -113,6 +113,42 @@ func (c *DBController) GetBookByID(bid int64) (*models.BookWithID, error) {
 
 // Get the books that were exchanged by the user
 // Returns the book list the user
-func (c *DBController) GetUserBooks(uid int64) []*models.Book {
-	return []*models.Book{}
+func (c *DBController) GetBooksOfUser(uid int64) ([]models.Book, error) {
+	var err error
+
+	db := c.Database
+
+	rows, err := db.Query(`
+		SELECT Books.title, Books.author, Books.genre, Books.pubDate, Books.lang, Books.isbn FROM Reviews
+			RIGHT JOIN Books ON Books.id = Reviews.bookId
+			WHERE Reviews.bookId = ?;
+		`, uid)
+
+	if err != nil {
+		return nil, &utils.UnknownError{
+			Err: err,
+		}
+	}
+
+	var books []models.Book
+
+	defer rows.Close()
+
+	for rows.Next() {
+		var book models.Book
+		if err = rows.Scan(&book.Title, &book.Author, &book.Genre, &book.PubDate, &book.Lang, &book.ISBN); err != nil {
+			return nil, &utils.UnknownError{
+				Err: err,
+			}
+		}
+		books = append(books, book)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, &utils.QueryProcessingError{
+			Err: err,
+		}
+	}
+
+	return books, nil
 }

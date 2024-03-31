@@ -36,7 +36,28 @@ func (api *APIController) GetUserByID(c *gin.Context) {
 }
 
 func (api *APIController) GetBooksOwnedByUser(c *gin.Context) {
+	var books []models.Book
+	id, err := strconv.Atoi((c.Param("id")))
 
+	if err != nil {
+		log.Printf("Error: %s\n", err)
+		c.Status(400)
+		return
+	}
+
+	books, err = api.DBController.GetBooksOfUser(int64(id))
+
+	if err != nil {
+		switch err.(type) {
+		case *utils.QueryProcessingError:
+		case *utils.UnknownError:
+		default:
+			c.Status(http.StatusInternalServerError)
+			return
+		}
+	}
+
+	c.JSON(http.StatusOK, books)
 }
 
 func (api *APIController) CreateUser(c *gin.Context) {

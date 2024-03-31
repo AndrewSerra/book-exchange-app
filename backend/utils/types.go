@@ -12,8 +12,6 @@ type Genre []string
 
 func (g *Genre) Scan(value interface{}) error {
 	content := string(value.([]byte))
-	fmt.Println(value.([]byte))
-	fmt.Println(content)
 	*g = strings.Split(content, ",")
 	return nil
 }
