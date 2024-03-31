@@ -59,3 +59,13 @@ type MalformedDataError struct {
 func (e *MalformedDataError) Error() string {
 	return fmt.Sprintf("Malformed data type: %s", e.Data)
 }
+
+// QUERY PROCESSING
+type QueryProcessingError struct {
+	Data interface{}
+	Err  error
+}
+
+func (e *QueryProcessingError) Error() string {
+	return fmt.Sprintf("Query processing failure: %s", e.Data)
+}

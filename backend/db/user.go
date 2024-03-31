@@ -116,3 +116,46 @@ func (c *DBController) UpdateEmail(uid int64, newEmail string) {}
 // Marks the user email as verified in the database
 // Takes user id as input.
 func (c *DBController) VerifyEmail(uid int64) {}
+
+// Queries the database to see if any user has
+// interacted with a book. This is both the receiving and
+// the sending end of the exchange.
+func (c *DBController) GetUsersInteractedWithBook(bid int64) ([]models.User, error) {
+	var err error
+
+	db := c.Database
+
+	rows, err := db.Query(`
+		SELECT Users.firstName, Users.lastName, Users.dob, Users.email FROM Reviews 
+			RIGHT JOIN Users ON Reviews.userId = Users.id 
+			WHERE bookId = ?;
+		`, bid)
+
+	if err != nil {
+		return nil, &utils.UnknownError{
+			Err: err,
+		}
+	}
+
+	var users []models.User
+
+	defer rows.Close()
+
+	for rows.Next() {
+		var user models.User
+		if err = rows.Scan(&user.FirstName, &user.LastName, &user.Dob, &user.Email); err != nil {
+			return nil, &utils.UnknownError{
+				Err: err,
+			}
+		}
+		users = append(users, user)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, &utils.QueryProcessingError{
+			Err: err,
+		}
+	}
+
+	return users, nil
+}

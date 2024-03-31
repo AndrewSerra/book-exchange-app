@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -35,8 +36,29 @@ func (api *APIController) GetBookByID(c *gin.Context) {
 	c.JSON(http.StatusOK, book)
 }
 
-func (api *APIController) GetUsersReadBookByID(c *gin.Context) {
+func (api *APIController) GetUsersConnectedToBook(c *gin.Context) {
+	var users []models.User
+	id, err := strconv.Atoi((c.Param("id")))
 
+	if err != nil {
+		fmt.Errorf("%s\n", err)
+		c.Status(400)
+		return
+	}
+
+	users, err = api.DBController.GetUsersInteractedWithBook(int64(id))
+
+	if err != nil {
+		switch err.(type) {
+		case *utils.QueryProcessingError:
+		case *utils.UnknownError:
+		default:
+			c.Status(http.StatusInternalServerError)
+			return
+		}
+	}
+
+	c.JSON(http.StatusOK, users)
 }
 
 func (api *APIController) CreateBook(c *gin.Context) {
