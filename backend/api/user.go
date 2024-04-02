@@ -60,6 +60,35 @@ func (api *APIController) GetBooksOwnedByUser(c *gin.Context) {
 	c.JSON(http.StatusOK, books)
 }
 
+func (api *APIController) GetUserAddress(c *gin.Context) {
+	var addresses []models.AddressWithID
+	id, err := strconv.Atoi((c.Param("id")))
+
+	if err != nil {
+		log.Printf("Error: %s\n", err)
+		c.Status(400)
+		return
+	}
+
+	addresses, err = api.DBController.GetUserAddressRecords(int64(id))
+
+	if err != nil {
+		switch err.(type) {
+		case *utils.QueryProcessingError:
+			c.Status(http.StatusInternalServerError)
+			return
+		case *utils.UnknownError:
+			c.Status(http.StatusInternalServerError)
+			return
+		default:
+			c.Status(http.StatusInternalServerError)
+			return
+		}
+	}
+
+	c.JSON(http.StatusOK, addresses)
+}
+
 func (api *APIController) CreateUser(c *gin.Context) {
 	var user models.User
 	var createdUser *models.UserWithID

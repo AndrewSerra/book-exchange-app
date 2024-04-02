@@ -8,6 +8,25 @@ import (
 	"time"
 )
 
+type BitBool bool
+
+func (b *BitBool) Scan(value interface{}) error {
+	v, ok := value.([]byte)
+	if !ok {
+		return errors.New("bad []byte type assertion")
+	}
+	*b = v[0] == 1
+	return nil
+}
+
+func (b BitBool) Value() (driver.Value, error) {
+	if b {
+		return []byte{1}, nil
+	} else {
+		return []byte{0}, nil
+	}
+}
+
 type Genre []string
 
 func (g *Genre) Scan(value interface{}) error {

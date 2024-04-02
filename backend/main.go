@@ -42,6 +42,7 @@ func main() {
 
 	router.GET("/users/:id", apiController.GetUserByID)
 	router.GET("/users/:id/books", apiController.GetBooksOwnedByUser)
+	router.GET("/users/:id/addresses", apiController.GetUserAddress)
 	router.DELETE("/users/:id", apiController.DeleteUserByID)
 	router.POST("/users", apiController.CreateUser)
 

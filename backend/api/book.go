@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -41,7 +40,7 @@ func (api *APIController) GetUsersConnectedToBook(c *gin.Context) {
 	id, err := strconv.Atoi((c.Param("id")))
 
 	if err != nil {
-		fmt.Errorf("%s\n", err)
+		log.Println(err)
 		c.Status(400)
 		return
 	}

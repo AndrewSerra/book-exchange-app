@@ -45,13 +45,13 @@ type ReviewWithID struct {
 }
 
 type Address struct {
-	Addr1      string `json:"address" binding:"required"`
-	Addr2      string `json:"address2"`
-	District   string `json:"district" binding:"required"`
-	City       string `json:"city" binding:"required"`
-	Country    string `json:"country" binding:"required"`
-	PostalCode string `json:"postalCode" binding:"required"`
-	Default    bool   `json:"isDefault" binding:"required"`
+	Addr1      string        `json:"address" binding:"required"`
+	Addr2      string        `json:"address2"`
+	District   string        `json:"district" binding:"required"`
+	City       string        `json:"city" binding:"required"`
+	Country    string        `json:"country" binding:"required"`
+	PostalCode string        `json:"postalCode" binding:"required"`
+	Default    utils.BitBool `json:"isDefault" binding:"required"`
 }
 
 type AddressWithID struct {

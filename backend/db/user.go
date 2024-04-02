@@ -35,6 +35,44 @@ func (c *DBController) GetUserByID(uid int64) (*models.UserWithID, error) {
 	return user, nil
 }
 
+func (c *DBController) GetUserAddressRecords(uid int64) ([]models.AddressWithID, error) {
+	var addresses []models.AddressWithID
+	var err error
+
+	db := c.Database
+
+	rows, err := db.Query(`
+		SELECT id, address, address2, district, city, country, postalCode, isDefault FROM Addresses
+			WHERE userId = ?;
+	`, uid)
+
+	if err != nil {
+		return nil, &utils.UnknownError{
+			Err: err,
+		}
+	}
+
+	for rows.Next() {
+		var address models.AddressWithID
+		if err = rows.Scan(
+			&address.Id, &address.Addr1, &address.Addr2, &address.District, &address.City,
+			&address.Country, &address.PostalCode, &address.Default); err != nil {
+			return nil, &utils.UnknownError{
+				Err: err,
+			}
+		}
+		addresses = append(addresses, address)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, &utils.QueryProcessingError{
+			Err: err,
+		}
+	}
+
+	return addresses, nil
+}
+
 // Creates a user in the database
 // Takes the first name, last name, date of birth,
 // and email of the user.
