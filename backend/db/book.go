@@ -5,8 +5,8 @@ import (
 	"log"
 	"strings"
 
-	"../models"
-	"../utils"
+	"github.com/AndrewSerra/book-exchange/models"
+	"github.com/AndrewSerra/book-exchange/utils"
 	"github.com/go-sql-driver/mysql"
 )
 

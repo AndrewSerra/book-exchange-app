@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"log"
 
-	"./api"
-	"./db"
+	"github.com/AndrewSerra/book-exchange/api"
+	"github.com/AndrewSerra/book-exchange/db"
 	"github.com/gin-gonic/gin"
 
 	_ "github.com/go-sql-driver/mysql"

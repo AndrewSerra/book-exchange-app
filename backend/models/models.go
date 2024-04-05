@@ -1,6 +1,6 @@
 package models
 
-import "../utils"
+import "github.com/AndrewSerra/book-exchange/utils"
 
 type ObjectWithID struct {
 	Id int64 `json:"id"  binding:"required"`

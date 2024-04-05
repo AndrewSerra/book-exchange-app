@@ -1,7 +1,7 @@
 package api
 
 import (
-	"../db"
+	"github.com/AndrewSerra/book-exchange/db"
 )
 
 type APIController struct {

@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"../models"
-	"../utils"
+	"github.com/AndrewSerra/book-exchange/models"
+	"github.com/AndrewSerra/book-exchange/utils"
 	"github.com/gin-gonic/gin"
 )
 
