@@ -22,6 +22,12 @@ class BestSellerBookScraper(scrapy.Spider):
 
     def start_requests(self) -> scrapy.spiders.Iterable[scrapy.Request]:
         yield scrapy.Request(url="https://www.barnesandnoble.com/b/books/_/N-1fZ29Z8q8", callback=self.parse)
+        yield scrapy.Request(url="https://www.barnesandnoble.com/b/books/_/N-1fZ1z141jfZ29Z8q8", callback=self.parse)
+        yield scrapy.Request(url="https://www.barnesandnoble.com/b/paperback/_/N-1fZ2cnh", callback=self.parse)
+        yield scrapy.Request(url="https://www.barnesandnoble.com/b/fiction/books/_/N-1fZ2usxZ29Z8q8", callback=self.parse)
+        yield scrapy.Request(url="https://www.barnesandnoble.com/b/nonfiction/books/_/N-1fZ2urcZ29Z8q8", callback=self.parse)
+        yield scrapy.Request(url="https://www.barnesandnoble.com/b/bn-stores-bestsellers-hardcover-fiction-nonfiction/_/N-1p4n", callback=self.parse)
+        yield scrapy.Request(url="https://www.barnesandnoble.com/b/books/teens-ya/_/N-1fZ29Z8q8Z19r4", callback=self.parse)
     
     def parse(self, response: scrapy.spiders.Response) -> scrapy.spiders.Any:
         for item in response.css(".product-info-view"):

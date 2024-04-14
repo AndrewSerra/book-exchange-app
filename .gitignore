@@ -1,2 +1,6 @@
 backend/docs
 .DS_Store
+
+scrapers/out/
+__pycache__/
+*.py[cod]
