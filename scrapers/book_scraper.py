@@ -14,7 +14,8 @@ class BestSellerBookScraper(scrapy.Spider):
 
         self.f = open(f"out/{self.name}_{datetime.now()}.csv", "w")
         
-        self.f.write(f"{",".join(["isbn", "title", "author", "pubDate", "publisher", "genre"])}\n")
+        col_headers = ",".join(["isbn", "title", "author", "pubDate", "publisher", "genre"])
+        self.f.write(f"{col_headers}\n")
     
     def __del__(self):
         if not self.f.closed:
