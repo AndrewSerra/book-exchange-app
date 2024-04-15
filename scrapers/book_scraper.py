@@ -9,10 +9,10 @@ class BestSellerBookScraper(scrapy.Spider):
     def __init__(self):
         self.name = 'bestsellerbookspider'
 
-        if not Path("./out").exists():
-            Path("./out").mkdir(exist_ok=True)
+        if not Path("/usr/local/data/scraper").exists():
+            Path("/usr/local/data/scraper").mkdir(exist_ok=True)
 
-        self.f = open(f"out/{self.name}_{datetime.now()}.csv", "w")
+        self.f = open(f"/usr/local/data/scraper/{self.name}_{datetime.now()}.csv", "w")
         
         col_headers = ",".join(["isbn", "title", "author", "pubDate", "publisher", "genre"])
         self.f.write(f"{col_headers}\n")
