@@ -2,5 +2,8 @@ backend/docs
 .DS_Store
 
 scrapers/out/
+scrapers/run.sh
+
 __pycache__/
 *.py[cod]
+
